@@ -1,0 +1,44 @@
+PROGRAM :
+
+# Hill Climbing Algorithm
+
+def hill_climbing(start):
+    current = start
+
+    while True:
+        current_value = current * (10 - current)
+
+        # Check left and right neighbours
+        left = current - 1
+        right = current + 1
+
+        left_value = left * (10 - left)
+        right_value = right * (10 - right)
+
+        # Move to better neighbour
+        if left_value > current_value:
+            current = left
+        elif right_value > current_value:
+            current = right
+        else:
+            break
+
+    return current, current * (10 - current)
+
+
+start = int(input("Enter starting value: "))
+
+best_state, maximum = hill_climbing(start)
+
+print("Best state:", best_state)
+print("Maximum value:", maximum)
+
+output:
+
+Enter starting value: 2
+Best state: 5
+Maximum value: 25
+
+
+
+
