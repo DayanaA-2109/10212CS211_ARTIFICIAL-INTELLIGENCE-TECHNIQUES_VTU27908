@@ -1,0 +1,40 @@
+PROGRAM:
+
+
+from collections import deque
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    print("BFS TRAVERSAL:", end=" ")
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+start_node = input("Enter the starting vertex: ")
+bfs(graph, start_node)
+
+
+OUTPUT:
+
+Enter the starting vertex: A
+BFS TRAVERSAL: A B C D E F 
+
+
