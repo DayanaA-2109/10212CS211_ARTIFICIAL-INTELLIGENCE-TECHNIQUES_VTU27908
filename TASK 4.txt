@@ -1,0 +1,76 @@
+PROGRAM :
+
+# Mini-Max with Alpha-Beta Pruning
+
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [3, 5],
+    'E': [6, 9],
+    'F': [1, 2],
+    'G': [0, 1]
+}
+
+pruned = []
+
+
+def minimax(node, alpha, beta, maximizing):
+    children = tree.get(node)
+
+    if children is None:
+        return node, [node]
+
+    if maximizing:
+        best_value = float('-inf')
+        best_path = []
+
+        for i, child in enumerate(children):
+            value, path = minimax(child, alpha, beta, False)
+
+            if value > best_value:
+                best_value = value
+                best_path = [node] + path
+
+            alpha = max(alpha, best_value)
+
+            if alpha >= beta:
+                pruned.extend(children[i + 1:])
+                break
+
+        return best_value, best_path
+
+    else:
+        best_value = float('inf')
+        best_path = []
+
+        for i, child in enumerate(children):
+            value, path = minimax(child, alpha, beta, True)
+
+            if value < best_value:
+                best_value = value
+                best_path = [node] + path
+
+            beta = min(beta, best_value)
+
+            if alpha >= beta:
+                pruned.extend(children[i + 1:])
+                break
+
+        return best_value, best_path
+
+
+value, path = minimax('A', float('-inf'), float('inf'), True)
+
+print("Mini-Max Value:", value)
+print("Best Move:", path[1])
+print("Optimal Path:", " -> ".join(map(str, path)))
+print("Pruned Branches:", pruned)
+
+
+OUTPUT :
+
+Mini-Max Value: 5
+Best Move: B
+Optimal Path: A -> B -> D -> 5
+Pruned Branches: [9, 'G']
