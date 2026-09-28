@@ -1,0 +1,70 @@
+PROGRAM:
+
+state = {
+    "monkey": "door",
+    "box": "window",
+    "banana": "ceiling",
+    "on_box": False,
+    "has_banana": False
+}
+
+
+goal = "Monkey has banana"
+
+print("Monkey position =", state["monkey"],
+      "  Box position =", state["box"],
+      "  Banana position =", state["banana"],
+      "  Goal =", goal)
+
+print("\nInitial State:")
+print("Monkey position =", state["monkey"])
+print("Box position =", state["box"])
+print("Banana position =", state["banana"])
+print("On box =", state["on_box"])
+print("Has banana =", state["has_banana"])
+print("Goal =", goal)
+
+state["on_box"] = True
+print("\nMonkey climbs the box.")
+
+state["monkey"] = "banana"
+state["box"] = "banana"
+print("Monkey pushes the box under the banana.")
+
+state["has_banana"] = True
+
+
+print("\nFinal State:")
+print("Monkey position =", state["monkey"])
+print("Box position =", state["box"])
+print("Banana position =", state["banana"])
+print("On box =", state["on_box"])
+print("Has banana =", state["has_banana"])
+
+if state["has_banana"]:
+    print("\nGoal Achieved: Monkey has the banana.")
+
+
+OUTPUT:
+
+Monkey position = door   Box position = window   Banana position = ceiling   Goal = Monkey has banana
+
+Initial State:
+Monkey position = door
+Box position = window
+Banana position = ceiling
+On box = False
+Has banana = False
+Goal = Monkey has banana
+
+Monkey climbs the box.
+Monkey pushes the box under the banana.
+
+Final State:
+Monkey position = banana
+Box position = banana
+Banana position = ceiling
+On box = True
+Has banana = True
+
+Goal Achieved: Monkey has the banana.
